@@ -1,6 +1,8 @@
 import React from 'react'
+import { isPropertySignature } from 'typescript'
 import {InputContainerBase,
     TextAreaBase,
+    InputRange,
 } from '../lib/Styled'
 
 interface InputBasicProps extends React.HTMLAttributes<HTMLDivElement>{
@@ -53,9 +55,17 @@ const Area = (props: AreaProps) => {
         />
     )
 }
-
+interface RangeProps extends React.InputHTMLAttributes<HTMLInputElement>{
+    setValue: (e: any) => void
+}
+const Range = (props: RangeProps) => {
+    return(
+        <InputRange type="range" min="0" max="100" step="1" value={props.value} onChange={props.setValue}/>
+    )
+}
 // props.readonly === false ? false : true
 export default {
     Basic,
     Area,
+    Range,
 }
