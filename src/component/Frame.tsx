@@ -207,8 +207,32 @@ const DragScroll = (props: React.HTMLAttributes<HTMLDivElement>) => {
     </DragScrollContainer>
   );
 };
+interface SortingProps{
+  list: number[]
+  type: "asc" | "desc"
+}
+const Sorting = (props: SortingProps) => {
+  // 오름차순
+  const ascending = () => {
+    const temp = [...props.list]
+    temp.sort((a, b) => a - b)
+    return temp.map((item, idx) => <div key={idx}>{item}</div>)
+  }
+  // 내림차순
+  const descending = () => {
+    const temp = [...props.list]
+    temp.sort((a, b) => b - a)
+    return temp.map((item, idx) => <div key={idx}>{item}</div>)
+  }
+  return(
+    <div style={{display: "flex", gap: 10}}>
+    {props.type === "asc" ? ascending() : descending()}
+    </div>
+  )
+}
 export default {
   OptionBox,
   AddItemInput,
   DragScroll,
+  Sorting
 };

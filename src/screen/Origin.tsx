@@ -1,17 +1,33 @@
-import {useState} from 'react'
-import {useNavigate, useLocation, Routes, Route, useParams} from 'react-router-dom'
+import {useNavigate, Routes, Route, useParams} from 'react-router-dom'
 import styled from 'styled-components'
+// router
 import Sc_Input from './Input'
 import Sc_Text from './Text'
 import Sc_Image from './Image'
+import Sc_Color from './Color'
 import Sc_Frame from './Frame'
 import Sc_Times from './Times'
 import Sc_Calendar from './Calendar'
 import Sc_Swiper from './Swiper'
-
-const list_path: string[] = [
-    "home", "input", "text", "image", "frame", "times", "calendar", "swiper" 
+import Sc_Menu from './Menu'
+import Sc_Modal from './Modal'
+interface Router {
+    path: string
+    element: JSX.Element
+}
+const list_router:Router[] = [
+    {path: "input", element: <Sc_Input />},
+    {path: "text", element: <Sc_Text/>},
+    {path: "image", element: <Sc_Image/>},
+    {path: "color", element: <Sc_Color/>},
+    {path: "frame", element: <Sc_Frame/>},
+    {path: "times", element: <Sc_Times/>},
+    {path: "calendar", element: <Sc_Calendar/>},
+    {path: "swiper", element: <Sc_Swiper/>},
+    {path: "menu", element: <Sc_Menu/>},
+    {path: "modal", element: <Sc_Modal/>},
 ]
+
 export interface Params {
     ['*']: string;
 }
@@ -27,18 +43,12 @@ export default () => {
     return(
         <Container>
             <HeaderContainer>
-                {list_path.map(path => (
-                    <div key={path} className={currentPage(path)} onClick={()=>{navigate(`/${path === "home" ? "" : path}`)}}>{path}</div>
+                {list_router.map(router => (
+                    <div key={router.path} className={currentPage(router.path)} onClick={()=>{navigate(`/${router.path === "home" ? "" : router.path}`)}}>{router.path}</div>
                 ))}
             </HeaderContainer>
             <Routes>
-                <Route path="input" element={<Sc_Input />} />
-                <Route path="text" element={<Sc_Text />} />
-                <Route path="image" element={<Sc_Image />} />
-                <Route path="frame" element={<Sc_Frame />} />
-                <Route path="times" element={<Sc_Times />} />
-                <Route path="calendar" element={<Sc_Calendar />} />
-                <Route path="swiper" element={<Sc_Swiper />} />
+                {list_router.map(router => (<Route key={router.path} path={router.path} element={router.element} />))}
             </Routes>
       </Container>
     )

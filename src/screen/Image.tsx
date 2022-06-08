@@ -126,6 +126,10 @@ export default () => {
           {styled4 && previewImages(styled4)}
         </ImageUploader2>
       </section>
+      <section>
+        <p>SVG 컬러링</p>
+        <Image.ColoredSVG />
+      </section>
     </main>
   );
 };

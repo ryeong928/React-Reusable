@@ -49,6 +49,8 @@ export default () => {
           <div key={idx}>{idx}</div>
         ))}
       </Frame.DragScroll>
+      <Frame.Sorting type="asc" list={[0, 10, 100, 50, 90, 20, 40, 80, -10, -50, 50]}/>
+      <Frame.Sorting type="desc" list={[0, 10, 100, 50, 90, 20, 40, 80, -10, -50, 50]}/>
     </main>
   );
 };

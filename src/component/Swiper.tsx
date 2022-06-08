@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Constants from '../lib/Constants';
+import {useState} from 'react'
 // react swiper 핵심
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Pagination, Autoplay} from 'swiper';
@@ -17,18 +18,21 @@ interface SwiperProps {
     pagination?: boolean
     centeredSlides?: boolean
     autoPlayDelay?: number
-    listArr: ItemProps[];
+    list: ItemProps[];
 }
 export default (props: SwiperProps) => {
+    const [activeIdx, setActiveIdx] = useState<number>(1)
+    console.log(activeIdx)
     return (
         <StyledSwiper
-        slidesPerView={props.slidesPerView || 1.5}
+            slidesPerView={props.slidesPerView || 1.5}
             spaceBetween={props.spaceBetween || 10}
             pagination={{clickable: props.pagination || true}}
             centeredSlides={props.centeredSlides || true}
             autoplay={props.autoPlayDelay ? {delay: props.autoPlayDelay} : undefined}
+            onSlideChange={e => {setActiveIdx(e.activeIndex + 1)}}
             >
-            {props.listArr.map((item, idx) => (
+            {props.list.map((item, idx) => (
                 <SwiperSlide key={item.name}>
                     <div>{item.name}</div>
                     <div>{item.price}</div>
@@ -39,7 +43,7 @@ export default (props: SwiperProps) => {
 };
 
 const StyledSwiper = styled(Swiper)`
-margin: 0 auto;
+    margin: 0 auto;
     position: relative;
     width: 250px;
     height: 250px;

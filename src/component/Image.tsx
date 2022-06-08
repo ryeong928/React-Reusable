@@ -1,11 +1,17 @@
-import React, { ChangeEvent, ProgressHTMLAttributes } from "react";
+import React, { ChangeEvent } from "react";
+import styled from 'styled-components'
+import {ReactComponent as AppleFilled} from '../resource/AppleFilled.svg';
+import {ReactComponent as AppleHollowed} from '../resource/AppleHollowed.svg';
 import { BoardFileInput } from "../lib/Interface";
 
+// 사전지식
 // FileReader 객체 : 비동기적으로 파일의 내용을 읽어들이는데 사용된다
 // 속성 : error, readyState, result
 // 이벤트 : on + load(읽기 성공), error, abort, loadstart, loadend, progress
 // 메소드 : abort(읽기 중단), readAsDataURL(바이너리 파일을 Base64 Encode 문자열로 반환), readAsText(텍스트 파일을 읽어들임)
 // File 객체는 input 태그를 통하여 유저가 선택한 파일들의 결과로 반환된 FileList 객체
+
+// 컴포넌트 사용방법
 interface ImageUploadProps extends React.HTMLAttributes<HTMLDivElement> {
   // 이미지 등록 갯수
   howMany: number;
@@ -61,6 +67,31 @@ const Uploader = (props: ImageUploadProps) => {
     />
   );
 };
+
+// SVG 색상 변경
+interface AppleSVGProps {
+  color?: string;
+}
+const SVG_Apple_F = styled(AppleFilled)<AppleSVGProps>`
+    stroke: ${props => props.color || "black"}
+`;
+const SVG_Apple_H = styled(AppleHollowed)<AppleSVGProps>`
+    fill: ${props => props.color || "black"}
+`;
+const ColoredSVG = () => {
+  return(
+    <div style={{display: "flex", gap: 10}}>
+      <SVG_Apple_F color={"red"} />
+      <SVG_Apple_H color={"yellow"} />
+      <SVG_Apple_F color={"palegreen"} />
+      <SVG_Apple_H color={"skyblue"} />
+      <SVG_Apple_F color={"blue"} />
+      <SVG_Apple_H color={"purple"} />
+      <SVG_Apple_F />
+    </div>
+  )
+}
 export default {
   Uploader,
+  ColoredSVG
 };

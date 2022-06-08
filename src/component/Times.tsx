@@ -1,7 +1,8 @@
-import {useState, useEffect} from 'react'
-import {DateSetterContainer} from '../lib/Styled'
+import React, {useState, useEffect} from 'react'
+import {DateSetterContainer, TimeSetterContainer} from '../lib/Styled'
 import ArrowLeftBlack from '../resource/ArrowLeftBlack.svg'
 import ArrowRightBlack from '../resource/ArrowRightBlack.svg'
+import IconClock from '../resource/IconClock.svg'
 
 interface DateSetterProps extends React.HTMLAttributes<HTMLDivElement> {
     date: Date;
@@ -83,14 +84,24 @@ const DateSetter = (props: DateSetterProps) => {
         </DateSetterContainer>
     )
 }
-
-const Calendar = () => {
+interface TimeSetterProps {
+    placeholder: string
+    value: string
+    setValue: React.Dispatch<React.SetStateAction<string>>
+}
+const TimeSetter = (props: TimeSetterProps) => {
+    const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        props.setValue(e.currentTarget.value)
+    }
     return(
-        <div>캘린더</div>
+        <TimeSetterContainer>
+            <div>{props.value ? props.value : props.placeholder}</div>
+            <img src={IconClock} />
+            <input type="time" placeholder={props.placeholder} value={props.value} onChange={onChange} />
+        </TimeSetterContainer>
     )
 }
-
 export default {
+    TimeSetter,
     DateSetter,
-    Calendar
 }

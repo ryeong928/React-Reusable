@@ -159,7 +159,6 @@ export default (props: CalendarProps) => {
                 </section>
                 <section>
                     {FullDates.map((date, idx) => {
-                        
                         const isRecord = when.find(item => {
                             return (item.split(".")[2] === String(date)) ? true : false
                         })

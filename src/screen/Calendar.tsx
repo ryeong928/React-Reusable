@@ -26,8 +26,7 @@ const list_calendar = [
 export default () => {
     return(
         <main>
-                <Calendar list={list_calendar}/>
-
+            <Calendar list={list_calendar}/>
         </main>
     )
 }

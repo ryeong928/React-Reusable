@@ -236,6 +236,108 @@ export const InputContainerBase = styled.div`
     padding: 10px;
   }
 `;
+export const TimeSetterContainer = styled.div`
+  position: relative;
+  width: 250px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 8px;
+  & > img{
+    position: absolute;
+    width: 21px;
+    aspect-ratio: 1/1;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+  }
+  & > input{
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    ::-webkit-calendar-picker-indicator{
+      width: 100%;
+      height: 100%;
+    }
+  }
+`
+export const InputRange = styled.input`
+  -webkit-appearance: none;
+  width: 200px;
+  height: 30px;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  background-color: #ddd;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+  overflow: hidden;
+  &::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: -215px 0 0 200px red;
+  }
+}
+`
+export const InputSearchContainer = styled.form`
+  width: 250px;
+  height: 40px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  overflow: hidden;
+  & > input{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+    flex: 1;
+    ::placeholder{
+      font-weight: 300;
+      color: gray;
+    }
+  }
+  & > button{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    width: 50px;
+    & > img{
+      margin: 0 auto;
+    }
+  }
+`
+export const InputValidationContainer = styled.div`
+position: relative;
+width: 250px;
+height: 40px;
+border: 1px solid gray;
+border-radius: 10px;
+display: flex;
+  & > input{
+    outline: none;
+    border: none;
+    flex: 1;
+    margin: 0 40px 0 10px;
+  }
+  & > svg{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+  }
+`
 export const TextAreaBase = styled.textarea`
   width: 100%;
   height: 80px;
@@ -255,31 +357,6 @@ export const TextAreaBase = styled.textarea`
     display: none;
   }
 `;
-// 
-
-export const InputRange = styled.input`
-  -webkit-appearance: none;
-  width: 200px;
-  height: 30px;
-  border: none;
-  outline: none;
-  border-radius: 8px;
-  background-color: #ddd;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
-  overflow: hidden;
-  &::-webkit-slider-thumb{
-    -webkit-appearance: none;
-    position: relative;
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    background-color: white;
-    cursor: pointer;
-    box-shadow: -215px 0 0 200px red;
-  }
-}
-
-`
 /* Text */
 export const RowEllipsisContainer = styled.div`
   overflow: hidden;
@@ -290,6 +367,7 @@ export const RowEllipsisContainer = styled.div`
   color: white;
   background-color: black;
 `;
+
 // 여러줄 생략법은 height를 lines로 나눴을때의 값이 line-height 값이 되어야 한다
 interface RowsEllipsisContainerProps {
   lines: number;
@@ -307,6 +385,137 @@ export const RowsEllipsisContainer = styled.div<RowsEllipsisContainerProps>`
   height: 60px;
   line-height: 20px;
 `;
+
+/* Menu */
+interface DropDownContainerProps {
+  isOpened: boolean
+  height: number | undefined
+}
+export const DropDownContainer = styled.div<DropDownContainerProps>`
+  position: relative;
+  & > header{
+    position: relative;
+    width: 250px;
+    height: 50px;
+    overflow: hidden;
+    border: 1px solid gray;
+    border-radius: 10px;
+    ${props => props.isOpened && css`
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    `}
+    & > div{
+      background-color: palegreen;
+      text-align: center;
+      line-height: 50px;
+    }
+    & > sub{
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+    }
+  }
+  & > main{
+    position: absolute;
+    z-index: 11;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: ${props => props.height ? `${props.height}px` : "auto"};
+    border: 1px solid gray;
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    & > div{
+      width: 100%;
+      color: red;
+      background-color: yellow;
+      border-top: 1px solid gray;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+    & > div:first-child{
+      border: none;
+    }
+  }
+`
+
+/* Modal */
+export const ModalContainer1 = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 101;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > body{
+    margin: 30px;
+    border-radius: 20px;
+    background-color: white;
+    width: 100%;
+    overflow: hidden;
+    & > header{
+      background-color: yellow;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 50px;
+      & > img{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 15px;
+        right: 20px;
+      }
+    }
+    & > main{
+      background-color: skyblue;
+      & > main{
+        padding: 20px;
+        height: 200px;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        & > div{
+          background-color: white;
+        }
+      }
+      & > footer{
+      height: 50px;
+        background-color: palegreen;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & > button{
+          outline: none;
+          width: 100px;
+          height: 30px;
+          background-color: white;
+          border: 1px solid black;
+        }
+      }
+    }
+  }
+`
 /* font font font font font font font font font */
 export const FontSize12K = styled.div`
   ${Constants.fontCSS.size12};
