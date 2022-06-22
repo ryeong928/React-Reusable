@@ -1,6 +1,7 @@
 import Times from "../component/Times"
 import {useState} from 'react'
 import useDate, {useDateProps} from "../lib/Hook/useDate";
+import {Row} from '../lib/Styled'
 
 export default () => {
     // useDate
@@ -18,6 +19,19 @@ export default () => {
         const cleanDate = `${date1_year}-${String(date1_month).padStart(2, '0')}-${String(date1_date,).padStart(2, '0')}`
         // timesetter
         const [time1, setTime1] = useState<string>('')
+          // dateinput
+  const [first_date, set_first_date] = useState<string>(cleanDate);
+  const [second_date, set_second_date] = useState<string>(cleanDate);
+  const first_splited = first_date.split("-");
+  const second_splited = second_date.split("-");
+  const first_calculated =
+    Number(first_splited[0]) * 365 +
+    Number(first_splited[1]) * 30 +
+    Number(first_splited[2]);
+  const second_calculated =
+    Number(second_splited[0]) * 365 +
+    Number(second_splited[1]) * 30 +
+    Number(second_splited[2]);
     return(
         <main>
             <section>
@@ -30,6 +44,14 @@ export default () => {
             <section>
                 <Times.TimeSetter value={time1} setValue={setTime1} placeholder="시간을 선택해주세요"/>
             </section>
+            <section>
+        <p>두 날짜 사이 계산</p>
+        <Row>
+          <Times.DateInput date={first_date} setDate={set_first_date} />
+          <Times.DateInput date={second_date} setDate={set_second_date} />
+          <div>{first_calculated - second_calculated}</div>
+        </Row>
+      </section>
         </main>
     )
 }

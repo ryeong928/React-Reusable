@@ -1,3 +1,4 @@
+import React from "react";
 import styled, { css } from "styled-components";
 import Constants from "./Constants";
 
@@ -516,6 +517,31 @@ left: 0;
     }
   }
 `
+/* Dropdown */
+export const DropDownBasic = styled.div`
+  position: relative;
+  border: 1px solid gray;
+  border-radius: 12px;
+  width: 300px;
+  height: 50px;
+  & > header {
+    width: 100%;
+    height: 100%;
+    padding: 0 4px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  & > main {
+    position: absolute;
+    & > div {
+      border: 1px solid gray;
+      width: 100%;
+      height: 25px;
+      text-align: center;
+    }
+  }
+`;
 /* font font font font font font font font font */
 export const FontSize12K = styled.div`
   ${Constants.fontCSS.size12};

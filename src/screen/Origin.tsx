@@ -11,6 +11,7 @@ import Sc_Calendar from './Calendar'
 import Sc_Swiper from './Swiper'
 import Sc_Menu from './Menu'
 import Sc_Modal from './Modal'
+import Sc_DropDown from './DropDown'
 interface Router {
     path: string
     element: JSX.Element
@@ -26,6 +27,7 @@ const list_router:Router[] = [
     {path: "swiper", element: <Sc_Swiper/>},
     {path: "menu", element: <Sc_Menu/>},
     {path: "modal", element: <Sc_Modal/>},
+    {path: "dropdown", element: <Sc_DropDown/>},
 ]
 
 export interface Params {

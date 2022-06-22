@@ -101,7 +101,23 @@ const TimeSetter = (props: TimeSetterProps) => {
         </TimeSetterContainer>
     )
 }
+interface DateInputProps extends React.HTMLAttributes<HTMLDivElement> {
+  date: string;
+  setDate: React.Dispatch<React.SetStateAction<string>>;
+}
+const DateInput = (props: DateInputProps) => {
+  return (
+    <input
+      type="date"
+      value={props.date}
+      onChange={(e) => {
+        props.setDate(e.target.value);
+      }}
+    />
+  );
+};
 export default {
     TimeSetter,
     DateSetter,
+    DateInput,
 }
