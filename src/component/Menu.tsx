@@ -51,7 +51,8 @@ const DropDown1 = (props: DropDown1Props) => {
     )
 }
 
+
 export default {
-    DropDown1
+    DropDown1,
 }
 

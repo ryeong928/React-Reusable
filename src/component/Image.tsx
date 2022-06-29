@@ -1,7 +1,9 @@
 import React, { ChangeEvent } from "react";
 import styled from 'styled-components'
-import {ReactComponent as AppleFilled} from '../resource/AppleFilled.svg';
-import {ReactComponent as AppleHollowed} from '../resource/AppleHollowed.svg';
+import {ReactComponent as AppleFilled} from '../resources/AppleFilled.svg';
+import {ReactComponent as AppleHollowed} from '../resources/AppleHollowed.svg';
+import { ReactComponent as IconDeparture } from "../resources/IconSquare.svg";
+import { ReactComponent as IconDestination } from "../resources/IconTriangle.svg";
 import { BoardFileInput } from "../lib/Interface";
 
 // 사전지식
@@ -91,7 +93,30 @@ const ColoredSVG = () => {
     </div>
   )
 }
+const ColoredSVG2 = () => {
+  return(
+    <div style={{display: "flex", gap: 10}}>
+              <IconDeparture
+          fill={"white"}
+          stroke={"purple"}
+        />
+        <IconDeparture
+          fill={"purple"}
+          stroke="transparent"
+        />
+        <IconDestination
+          fill={"white"}
+          stroke={"purple"}
+        />
+        <IconDestination
+          fill={"purple"}
+          stroke="transparent"
+        />
+    </div>
+  )
+}
 export default {
   Uploader,
-  ColoredSVG
+  ColoredSVG,
+  ColoredSVG2
 };

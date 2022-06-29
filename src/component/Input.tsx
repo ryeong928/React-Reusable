@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {InputContainerBase,
     TextAreaBase,
     InputRange,
     InputSearchContainer,
     InputValidationContainer,
 } from '../lib/Styled'
-import IconSearch from '../resource/IconSearch.svg'
 import  { ReactComponent as SVGIconCheck }  from '../resource/IconCheck.svg'
+import { ReactComponent as IconSearch } from "../resources/IconSearch.svg";
+import { ReactComponent as CircleCancel } from "../resources/CircleCancel.svg";
 
 interface InputBasicProps extends React.HTMLAttributes<HTMLDivElement>{
     type: "text" | "number" | "password"
@@ -69,27 +70,41 @@ const Range = (props: RangeProps) => {
         />
     )
 }
-interface SearchProps extends React.InputHTMLAttributes<HTMLInputElement>{
-    setValue: React.Dispatch<React.SetStateAction<string>>
+interface InputProps {
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  placeholder: string;
+  type?: string;
+  readOnly?: true;
+  onClick?: () => void;
 }
-const Search = (props: SearchProps) => {
-    const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-        props.setValue(e.currentTarget.value)
-    }
-    const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        alert(props.value)
-        props.setValue("")
-    }
-    return(
-        <InputSearchContainer onSubmit={onSubmit}>
-            <input type="text" placeholder={props.placeholder} value={props.value} onChange={onChange} />
-            <button type="submit">
-                <img src={IconSearch} />
-            </button>
-        </InputSearchContainer>
-    )
-}
+const Search = (props: InputProps) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    props.setValue(e.target.value);
+  };
+  const inputRef = useRef<HTMLInputElement>(null);
+  const resetValue = () => {
+    props.setValue("");
+    inputRef.current?.focus();
+    if (props.onClick) props.onClick();
+  };
+  return (
+    <InputSearchContainer>
+      <IconSearch />
+      <input
+        type={"text"}
+        value={props.value}
+        onChange={onChange}
+        placeholder={props.placeholder}
+        ref={inputRef}
+        spellCheck={false}
+      />
+      {props.value && (
+        <CircleCancel fill={"gray"} onClick={resetValue} />
+      )}
+    </InputSearchContainer>
+  );
+};
 interface ValidationProps extends React.InputHTMLAttributes<HTMLInputElement>{
     value: string
     setValue: React.Dispatch<React.SetStateAction<string>>

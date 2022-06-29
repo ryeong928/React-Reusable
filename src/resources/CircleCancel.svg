@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+    <g data-name="CircleCancel">
+        <g data-name="circle">
+            <path data-name="square" style="fill:none;opacity:.4" d="M0 0h30v30H0z"/>
+        </g>
+        <path data-name="close-circle" d="M11.375 3.375a8 8 0 1 0 8 8 8 8 0 0 0-8-8zm2.027 10.9-2.027-2.027-2.027 2.023a.615.615 0 1 1-.869-.869l2.027-2.027-2.027-2.027a.615.615 0 0 1 .869-.869l2.027 2.027L13.4 8.479a.615.615 0 0 1 .869.869l-2.027 2.027 2.029 2.025a.618.618 0 0 1 0 .869.611.611 0 0 1-.871.002z" transform="translate(4.46 4.46)" style="fill:current"/>
+    </g>
+</svg>

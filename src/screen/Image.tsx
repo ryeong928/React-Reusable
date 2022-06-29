@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Image from "../component/Image";
+import Button from "../component/Button";
 import { BoardFileInput } from "../lib/Interface";
 import PlusPink from "../resource/PlusPink.svg";
 import CloseCircleGray from "../resource/CloseCircleGray.svg";
@@ -12,6 +13,7 @@ export default () => {
   const [styled1, setStyled1] = useState<BoardFileInput[] | undefined>();
   const [styled3, setStyled3] = useState<BoardFileInput[] | undefined>();
   const [styled4, setStyled4] = useState<BoardFileInput[] | undefined>();
+  const [allocated, set_allocated] = useState<boolean>(false);
   const imageList = (images: BoardFileInput[] | undefined) => {
     return (
       <div
@@ -129,6 +131,13 @@ export default () => {
       <section>
         <p>SVG 컬러링</p>
         <Image.ColoredSVG />
+      </section>
+      <section>
+        <p>SVG 컬러링2</p>
+        <Image.ColoredSVG2 />
+      </section>
+      <section>
+        <Button.OnOff value={allocated} setValue={set_allocated} />
       </section>
     </main>
   );

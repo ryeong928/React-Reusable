@@ -53,6 +53,29 @@ export const GridBox = styled.div<GridBoxProps>`
   gap: ${(props) => props.gap}px;
 `;
 
+/* Button */
+export const BtnOnOff = styled.div`
+  background-color: ${(props) =>
+    props.placeholder === "active"
+      ? Constants.colors.pointColor1
+      : Constants.colors.baseColor6};
+  width: 42px;
+  height: 24px;
+  border-radius: 12px;
+  padding: 3px 4px;
+  box-shadow: inset 0 3px 6px rgb(0, 0, 0, 0.16);
+  & > div {
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    overflow: hidden;
+    background-color: ${Constants.colors.baseColor9};
+    transform: translateX(
+      ${(props) => (props.placeholder === "active" ? "16px" : "0")}
+    );
+    transition: all 0.2s;
+  }
+`;
 /* Frame */
 
 interface OptionBoxContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -156,6 +179,29 @@ export const DragScrollContainer = styled.div`
     height: 100px;
     background-color: white;
     border: 1px solid black;
+  }
+`;
+export const IndexListContainer = styled.div`
+  display: flex;
+  gap: 5px;
+  & > div {
+    color: gray;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 50%;
+    text-align: center;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  & > div.index_list_current {
+    color: white;
+    background-color: purple;
+    border: 1px solid purple;
+  }
+  & > sub {
+    flex: 1;
   }
 `;
 
@@ -291,34 +337,39 @@ export const InputRange = styled.input`
   }
 }
 `
-export const InputSearchContainer = styled.form`
-  width: 250px;
-  height: 40px;
-  border: 1px solid gray;
-  border-radius: 10px;
+export const InputSearchContainer = styled.div`
+  width: 100%;
+  height: 50px;
+  outline: none;
+  border: none;
+  border-radius: 12px;
+  background-color: ${Constants.colors.baseColor8};
   display: flex;
-  overflow: hidden;
-  & > input{
-    background-color: transparent;
-    outline: none;
-    border: none;
-    padding: 0 10px;
+  align-items: center;
+  padding: 5px 10px;
+  & > svg:nth-of-type(1) {
+    width: 40px;
+    height: 40px;
+  }
+  & > input {
     flex: 1;
-    ::placeholder{
-      font-weight: 300;
-      color: gray;
-    }
-  }
-  & > button{
-    background-color: transparent;
+    ${Constants.fontCSS.size15};
+    ${Constants.fontCSS.korean};
+    color: ${Constants.colors.baseColor1};
     outline: none;
     border: none;
-    width: 50px;
-    & > img{
-      margin: 0 auto;
+    background-color: transparent;
+    &::placeholder {
+      ${Constants.fontCSS.size14};
+      ${Constants.fontCSS.korean};
+      color: ${Constants.colors.baseColor4};
+    }
+    & > svg:nth-of-type(2) {
+      width: 30px;
+      height: 30px;
     }
   }
-`
+`;
 export const InputValidationContainer = styled.div`
 position: relative;
 width: 250px;
@@ -386,6 +437,13 @@ export const RowsEllipsisContainer = styled.div<RowsEllipsisContainerProps>`
   height: 60px;
   line-height: 20px;
 `;
+export const GradientText = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(0deg, #9c27b0, #2196f3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`
 
 /* Menu */
 interface DropDownContainerProps {
@@ -450,73 +508,53 @@ export const DropDownContainer = styled.div<DropDownContainerProps>`
     }
   }
 `
+export const DropDownMain = styled.div`
+  position: relative;
+  border: 1.5px solid ${Constants.colors.baseColor5};
+  border-radius: 12px;
+  width: 100%;
+  height: 50px;
+  & > header {
+    width: 100%;
+    height: 100%;
+    padding: 0 4px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  & > main {
+    position: absolute;
+    & > div {
+    }
+  }
+`;
 
 /* Modal */
-export const ModalContainer1 = styled.div`
-position: fixed;
-top: 0;
-left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 101;
+export const ModalInsideContainer = styled.div`
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  & > body{
-    margin: 30px;
-    border-radius: 20px;
-    background-color: white;
-    width: 100%;
-    overflow: hidden;
-    & > header{
-      background-color: yellow;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      height: 50px;
-      & > img{
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        top: 15px;
-        right: 20px;
-      }
-    }
-    & > main{
-      background-color: skyblue;
-      & > main{
-        padding: 20px;
-        height: 200px;
-        overflow-y: auto;
-        &::-webkit-scrollbar {
-          display: none;
-        }
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        & > div{
-          background-color: white;
-        }
-      }
-      & > footer{
-      height: 50px;
-        background-color: palegreen;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        & > button{
-          outline: none;
-          width: 100px;
-          height: 30px;
-          background-color: white;
-          border: 1px solid black;
-        }
-      }
-    }
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
   }
-`
+  & > main {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 20px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+`;
 /* Dropdown */
 export const DropDownBasic = styled.div`
   position: relative;

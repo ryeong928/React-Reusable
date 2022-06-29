@@ -19,6 +19,9 @@ export default () => {
         <section>
                 <Menu.DropDown1 list={fake_list1} item={item1} setItem={setItem1} placeholder="메뉴를 선택해주세요" height={160}/>
         </section>
+        <section>
+          
+        </section>
         </div>
     )
 }

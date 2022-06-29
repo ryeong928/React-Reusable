@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
-import {DropDownBasic} from '../lib/Styled'
+import {DropDownBasic, DropDownMain} from '../lib/Styled'
+import { ReactComponent as ArrowDown } from "../resources/ArrowDown.svg";
 
 interface BasicProps {
   list: string[]
@@ -35,7 +36,6 @@ const Basic = (props: BasicProps) => {
     if(!value) return
     props.setValue(value)
   }
-  console.log(isOpened)
   return(
     <DropDownBasic ref={dropdown} placeholder={props.count ? String(props.count) : ""}>
       <header>
@@ -49,6 +49,48 @@ const Basic = (props: BasicProps) => {
     </DropDownBasic>
   )
 }
+interface DropDownProps extends React.HTMLAttributes<HTMLDivElement> {
+  list: string[];
+  item: string;
+  setItem: React.Dispatch<React.SetStateAction<string>>;
+}
+const Main = (props: DropDownProps) => {
+  const dropdown = useRef<HTMLDivElement>(null);
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+  useEffect(() => {
+    const click = (e: any) => {
+      if (dropdown.current?.contains(e.target)) {
+        // inside click 1번 : 자신 클릭시 안닫힘
+        // if (!isOpened) return setIsOpened((prev) => !prev);
+        // inside click 2번 : 자신 클릭시 닫힘
+        setIsOpened((prev) => !prev);
+      } else {
+        // outside click
+        setIsOpened(false);
+      }
+    };
+    document.addEventListener("mousedown", click);
+    return () => {
+      document.removeEventListener("mousedown", click);
+    };
+  }, [isOpened]);
+  return (
+    <DropDownMain ref={dropdown}>
+      <header>
+        <div style={{fontSize: 15}}>신속정확 그린퀵</div>
+        <ArrowDown />
+      </header>
+      {isOpened && (
+        <main>
+          {props.list.map((item) => (
+            <div key={item}>{item}</div>
+          ))}
+        </main>
+      )}
+    </DropDownMain>
+  );
+};
 export default {
-  Basic
+  Basic,
+  Main
 }

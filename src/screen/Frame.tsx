@@ -18,6 +18,8 @@ export default () => {
   const [options2, setOptions2] = useState<string[] | []>([]);
   // AddItemInput
   const [list1, setList1] = useState<string[] | undefined>(undefined);
+  // indexList
+  const [current_idx, set_current_idx] = useState<number>(1)
   return (
     <main>
       <Frame.OptionBox
@@ -51,6 +53,9 @@ export default () => {
       </Frame.DragScroll>
       <Frame.Sorting type="asc" list={[0, 10, 100, 50, 90, 20, 40, 80, -10, -50, 50]}/>
       <Frame.Sorting type="desc" list={[0, 10, 100, 50, 90, 20, 40, 80, -10, -50, 50]}/>
+      <section>
+        <Frame.IndexList count={6} current_idx={current_idx} set_current_idx={set_current_idx}/>
+      </section>
     </main>
   );
 };

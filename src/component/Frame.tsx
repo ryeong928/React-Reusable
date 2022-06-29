@@ -3,6 +3,7 @@ import {
   OptionBoxContainer,
   AddItemInputContainer,
   DragScrollContainer,
+  IndexListContainer,
 } from "../lib/Styled";
 
 interface OptionBoxProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -230,9 +231,42 @@ const Sorting = (props: SortingProps) => {
     </div>
   )
 }
+interface IndexListProps extends React.HTMLAttributes<HTMLDivElement> {
+  // 인덱스 총 갯수
+  count: number;
+  // 현재 인덱스
+  current_idx: number;
+  // 클릭으로 인덱스로 이동
+  set_current_idx?: React.Dispatch<React.SetStateAction<number>>;
+}
+const IndexList = (props: IndexListProps) => {
+  const selectIdx = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!props.set_current_idx) return;
+    const selected_idx = e.currentTarget.textContent as string;
+    props.set_current_idx(Number(selected_idx));
+  };
+  return (
+    <IndexListContainer>
+      <sub />
+      {Array.from({ length: props.count }).map((v, index) => (
+        <div
+          key={index}
+          onClick={selectIdx}
+          style={{ lineHeight: "17px", fontSize: 12 }}
+          className={
+            props.current_idx === index + 1 ? "index_list_current" : ""
+          }
+        >
+          {index + 1}
+        </div>
+      ))}
+    </IndexListContainer>
+  );
+};
 export default {
   OptionBox,
   AddItemInput,
   DragScroll,
-  Sorting
+  Sorting,
+  IndexList
 };

@@ -7,17 +7,13 @@ export default () => {
     return(
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "20px 0", gap: 20}}>
             <section>
-                <button onClick={()=>{setModal1(prev => !prev)}}>기본 모달1</button>
-                {modal1 && (
-                <Modal.Base1 isOpened={modal1} setIsOpened={setModal1}>
-                    <main>
-                        {Array.from({length: 20}, (v, i) => i).map(item => <div key={item}>선택 {item}</div>)}
-                    </main>
-                    <footer>
-                        <button>선택</button>
-                    </footer>
-                </Modal.Base1>
-                )}
+              <button onClick={()=>{setModal1(true)}}>기본 모달2</button>
+              {modal1 && 
+                <Modal.Inside isOpened={modal1} setIsOpened={setModal1}>
+                    <div>안녕</div>
+                    <button onClick={()=>{setModal1(false)}}>닫기</button>
+                </Modal.Inside>
+              }
             </section>
         </div>
     )
